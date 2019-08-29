@@ -1,0 +1,34 @@
+name       : python-msm
+version    : 0.7.9
+release    : 1
+source     :
+    - https://files.pythonhosted.org/packages/46/e7/cd1c3771ecf644d95ef7c3ce7b53eeccccac1ad57c3ca3211f70ad02be29/msm-0.7.9.tar.gz : 955204cb293a83e9cc5d3af9a7d0db69d5bba9215e4bf4337d26bf4b635fd78a
+license    : Apache-2.0
+component  : programming.python
+summary    : Mycroft Skills Manager
+description: |
+    Mycroft Skills Manager library.
+builddeps  :
+    - python-gitpython
+    - python-typing
+    - python-lazy
+    - python-pako
+    - python-fasteners
+    - python-requests
+rundeps    :
+    - python-gitpython
+    - python-typing
+    - python-lazy
+    - python-pako
+    - python-fasteners
+    - python-requests
+setup      : |
+    %patch -p1 < $pkgfiles/0001-Don-t-use-opt.patch
+    %patch -p1 < $pkgfiles/0002-Don-t-use-sudo-or-virtualenv-to-install-skills.patch
+build      : |
+    %python3_setup
+install    : |
+    %python3_install
+    rm -rf $installdir/usr/msm
+check      : |
+    %python3_test

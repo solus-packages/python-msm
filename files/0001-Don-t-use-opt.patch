@@ -1,0 +1,48 @@
+From 17531dee5185abdd9af8e0ac1235c9de940f4893 Mon Sep 17 00:00:00 2001
+From: Fabio Forni <livingsilver94.solus@redaril.me>
+Date: Fri, 16 Aug 2019 14:31:43 +0200
+Subject: [PATCH] Don't use /opt
+
+---
+ msm/mycroft_skills_manager.py | 2 +-
+ msm/skill_repo.py             | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/msm/mycroft_skills_manager.py b/msm/mycroft_skills_manager.py
+index d714f73..7353e43 100644
+--- a/msm/mycroft_skills_manager.py
++++ b/msm/mycroft_skills_manager.py
+@@ -67,7 +67,7 @@ def save_skills_data(func):
+ class MycroftSkillsManager(object):
+     SKILL_GROUPS = {'default', 'mycroft_mark_1', 'picroft', 'kde',
+                     'respeaker', 'mycroft_mark_2', 'mycroft_mark_2pi'}
+-    DEFAULT_SKILLS_DIR = "/opt/mycroft/skills"
++    DEFAULT_SKILLS_DIR = expanduser('~/.mycroft/opt/skills')
+ 
+     def __init__(self, platform='default', skills_dir=None, repo=None,
+                  versioned=True):
+diff --git a/msm/skill_repo.py b/msm/skill_repo.py
+index b1119b7..8162233 100644
+--- a/msm/skill_repo.py
++++ b/msm/skill_repo.py
+@@ -21,7 +21,7 @@
+ # under the License.
+ from glob import glob
+ from os import makedirs
+-from os.path import exists, join, isdir, dirname, basename, normpath
++from os.path import exists, join, isdir, dirname, basename, normpath, expanduser
+ import json
+ 
+ from git import Repo
+@@ -71,7 +71,7 @@ def load_skills_data(branch, path):
+ 
+ class SkillRepo(object):
+     def __init__(self, path=None, url=None, branch=None):
+-        self.path = path or "/opt/mycroft/.skills-repo"
++        self.path = path or expanduser('~/.mycroft/opt/.skills-repo')
+         self.url = url or "https://github.com/MycroftAI/mycroft-skills"
+         self.branch = branch or "19.02"
+         self.repo_info = {}
+-- 
+2.22.0
+
