@@ -1,6 +1,6 @@
 name       : python-msm
 version    : 0.7.9
-release    : 1
+release    : 2
 source     :
     - https://files.pythonhosted.org/packages/46/e7/cd1c3771ecf644d95ef7c3ce7b53eeccccac1ad57c3ca3211f70ad02be29/msm-0.7.9.tar.gz : 955204cb293a83e9cc5d3af9a7d0db69d5bba9215e4bf4337d26bf4b635fd78a
 license    : Apache-2.0
